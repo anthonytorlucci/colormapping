@@ -19,20 +19,22 @@ from colormappy.predicates import is_acceptable_colorspace_3tuple
 class ColorPointIndex(object):
     """A single point within a colormap defined by an index value and three color values in a defined color space.
     Color values may correspond to rgb, XYZ, xyY, J'a'b', ect.
-
-    :param idx: the index location of a point within a colormap array
-    :type idx: float
-    :param c0: color value
-    :type c0: float
-    :param c1: color value
-    :type c1: float
-    :param c2: color value
-    :type c2: float
-    :param cspace: color space associated with the color values (defined by colorspacious)
-    :type cspace: str
     """
     def __init__(self, idx:float, c0:float, c1:float, c2:float, cspace:str):
         """Constructor method.
+
+        Parameters
+        ----------
+        idx : float
+            Index location of a point within a colormap array
+        c0 : float
+            Color value in color space (first index, e.g. red value in rgb space)
+        c1 : float
+            Color value in color space
+        c2 : float
+            Color value in color space
+        cspace : str
+            Color space associated with the color values (defined by colorspacious)
         """
         self.idx = idx
         self.c0 = c0
@@ -47,6 +49,8 @@ class ColorPointIndex(object):
             raise err
         
 
+    # TODO: __repr__
+    # better info with f'index: {self.idx}, red: {self.c0}, green: {sel.c1}, blue: {self.c2}'
     def __str__(self):
         s = str(self.idx) + ", "
         s += str(self.c0) + ", "
