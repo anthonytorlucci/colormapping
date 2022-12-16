@@ -62,12 +62,16 @@ class ColorPointIndex(object):
 def create_colormap(points: list, interp_cspace="CAM02-UCS") -> numpy.ndarray:
     """Create a colormap via interpolation in interp_cspace color space and output in sRGB1 color space given a list of :class `colormappy.colorpointindex.ColorPointIndex` objects.
 
-    :param points: list of :class `colormappy.colorpointindex.ColorPointIndex` objects
-    :type points: list
-    :param interp_cspace: color space in which to do the interpolation; must be one of the defined colorspacious color spaces
-    :type interp_cspace: str
-    :return: class `numpy.ndarray` of shape (256,3) in sRGB1 colorspace
-    :rtype: class `numpy.ndarray`
+    Parameters
+    ----------
+    points : list
+        List of :class `colormappy.colorpointindex.ColorPointIndex` objects
+    interp_cspace : str
+        Color space in which to do the interpolation; must be one of the defined colorspacious color spaces
+    
+    Returns
+    -------
+    class `numpy.ndarray` of shape (256,3) in sRGB1 colorspace
     """
     # points must be a list of ColorPointIndex objects; TODO: add try/except block and assert each element of list is of type ColorPointIndex
     # later versions should attempt to convert item to ColorPointIndex object
