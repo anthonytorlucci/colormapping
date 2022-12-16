@@ -31,4 +31,5 @@ for n in range(nspaces):
     cb1.set_label(space)
 
 fig.tight_layout()
-fig.show()
+# fig.show()
+plt.show()
