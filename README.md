@@ -1,7 +1,7 @@
 # colormapping
-fun with colormaps!
+Fun with colormaps!
 
-'Colormapping' is:
+`Colormapping` is:
 - a collection of open source colormaps
   - [matplotlib](https://matplotlib.org/stable/tutorials/colors/colormaps.html)
   - [cmocean](https://matplotlib.org/cmocean/)
