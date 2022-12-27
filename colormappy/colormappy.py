@@ -68,7 +68,7 @@ class ColorPointIndex(object):
         return s
 
 
-def create_colormap(points: list, interp_cspace="CAM02-UCS") -> numpy.ndarray:
+def create_colormap(points: list, interp_cspace="CAM02-UCS", interp_method="linear") -> numpy.ndarray:
     """Create a colormap via interpolation in interp_cspace color space and output in sRGB1 color space given a list of :class `colormappy.colorpointindex.ColorPointIndex` objects.
 
     Parameters
@@ -77,11 +77,14 @@ def create_colormap(points: list, interp_cspace="CAM02-UCS") -> numpy.ndarray:
         List of :class `colormappy.colorpointindex.ColorPointIndex` objects
     interp_cspace : str
         Color space in which to do the interpolation; must be one of the defined colorspacious color spaces
+    interp_method: str
+        Interplolation method used in scipy.interpolate.interp1d `kind` parameter. default='linear'
     
     Returns
     -------
     class `numpy.ndarray` of shape (256,3) in sRGB1 colorspace
     """
+    # TODO: verify interp_method is one of the strings accepted by scipy interp1d
     # points must be a list of ColorPointIndex objects; TODO: add try/except block and assert each element of list is of type ColorPointIndex
     # later versions should attempt to convert item to ColorPointIndex object
     # assert cspace is one of the defined colorspacious color spaces or subset, e.g. JCh
@@ -98,9 +101,9 @@ def create_colormap(points: list, interp_cspace="CAM02-UCS") -> numpy.ndarray:
         indices[n] = p.idx
         tmp_arr[n,:] = cspace_convert([p.c0, p.c1, p.c2], p.cspace, interp_cspace)
     
-    f0 = interp1d(indices, tmp_arr[:,0])  # color0  interpolation function in interp_cspace
-    f1 = interp1d(indices, tmp_arr[:,1])  # color1  interpolation function in interp_cspace
-    f2 = interp1d(indices, tmp_arr[:,2])  # color2  interpolation function in interp_cspace
+    f0 = interp1d(indices, tmp_arr[:,0], kind=interp_method)  # color0  interpolation function in interp_cspace
+    f1 = interp1d(indices, tmp_arr[:,1], kind=interp_method)  # color1  interpolation function in interp_cspace
+    f2 = interp1d(indices, tmp_arr[:,2], kind=interp_method)  # color2  interpolation function in interp_cspace
 
     # TODO: may need to extrapolate if first index > 0 or last index < 255
     ind_new = numpy.arange(256)
